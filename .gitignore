@@ -1,7 +1,6 @@
 
 # Byte-compiled / optimized / DLL files
-# Конфігураційні файли, які можуть містити облікові дані
-app/config/app.yml
+
 
 __pycache__/
 *.py[cod]
