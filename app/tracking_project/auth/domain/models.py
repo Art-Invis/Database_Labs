@@ -12,3 +12,4 @@ from auth.domain.package_tracking import PackageTracking
 from auth.domain.branches_senders import BranchesSenders
 from auth.domain.couriers import Couriers
 from auth.domain.courier_branches import CourierBranches
+from auth.domain.payment import Payment

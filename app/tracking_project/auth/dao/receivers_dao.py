@@ -42,4 +42,9 @@ class ReceiversDAO:
             return True
         return False
     
-    
+    @staticmethod
+    def get_all_with_packages():
+        """
+        Отримати всіх отримувачів разом із їхніми пакунками.
+        """
+        return Receivers.query.options(db.joinedload('packages')).all()

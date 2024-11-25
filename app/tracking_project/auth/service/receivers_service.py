@@ -49,3 +49,32 @@ class ReceiversService:
             return result  # Повертає True, якщо видалення пройшло успішно
         except Exception as e:
             raise Exception(f"Error deleting receiver: {str(e)}")
+        
+    
+    @staticmethod
+    def get_all_receivers_with_packages():
+        """
+        Отримати всіх отримувачів разом із їхніми пакунками.
+        """
+        try:
+            receivers = ReceiversDAO.get_all_with_packages()
+            result = [
+                {
+                    "receiver_id": receiver.receiver_id,
+                    "name": receiver.name,
+                    "email": receiver.email,
+                    "phone": receiver.phone,
+                    "packages": [
+                        {
+                            "package_id": package.package_id,
+                            "description": package.description,
+                            "status": package.status,
+                        }
+                        for package in receiver.packages
+                    ]
+                }
+                for receiver in receivers
+            ]
+            return result
+        except Exception as e:
+            raise Exception(f"Error retrieving receivers with packages: {str(e)}")

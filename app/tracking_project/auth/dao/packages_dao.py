@@ -9,13 +9,14 @@ class PackagesDAO:
         return Packages.query.all()
 
     @staticmethod
-    def create(sender_id, receiver_id, delivery_address_id, description, status):
+    def create(sender_id, receiver_id, delivery_address_id, description, status, weight):
         new_package = Packages(
             sender_id=sender_id,
             receiver_id=receiver_id,
             delivery_address_id=delivery_address_id,
             description=description,
-            status=status
+            status=status,
+            weight=weight  # Додаємо вагу
         )
         db.session.add(new_package)
         db.session.commit()

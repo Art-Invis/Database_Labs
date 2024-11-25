@@ -5,6 +5,7 @@ from auth.controllers.receivers_controller import (
     get_receiver_by_id_logic,
     update_receiver_logic,
     delete_receiver_logic,
+    get_receivers_with_packages_logic,
 )
 
 receivers_blueprint = Blueprint('receivers', __name__)
@@ -28,3 +29,7 @@ def update_receiver(receiver_id):
 @receivers_blueprint.route('/receivers/<int:receiver_id>', methods=['DELETE'])
 def delete_receiver(receiver_id):
     return delete_receiver_logic(receiver_id)
+
+@receivers_blueprint.route('/receivers/with_packages', methods=['GET'])
+def get_receivers_with_packages():
+    return get_receivers_with_packages_logic()

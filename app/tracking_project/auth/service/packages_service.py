@@ -1,4 +1,4 @@
-from auth.dao.packages_dao import PackagesDAO  # Імпортуємо DAO для пакетів
+from auth.dao.packages_dao import PackagesDAO  
 from flask import jsonify
 
 class PackagesService:
@@ -22,35 +22,40 @@ class PackagesService:
             raise Exception(f"Error retrieving package: {str(e)}")
         
     @staticmethod
-    def add_package(sender_id, receiver_id, delivery_address_id, description, status):
-        # Валідація вхідних даних
-        if not sender_id or not receiver_id or not delivery_address_id or not description or not status:
-            raise ValueError("All fields are required.")
-        
+    def add_package(sender_id, receiver_id, delivery_address_id, description, status, weight):
+        if not sender_id or not receiver_id or not delivery_address_id or not description or not status or weight is None:
+            raise ValueError("All fields, including weight, are required.")
+
+        if weight <= 0 or weight > 50:
+            raise ValueError("Weight must be between 0 and 50 kg.")
+
         try:
-            new_package = PackagesDAO.create(sender_id, receiver_id, delivery_address_id, description, status)
+            new_package = PackagesDAO.create(sender_id, receiver_id, delivery_address_id, description, status, weight)
             return new_package
         except Exception as e:
             raise Exception(f"Error adding package: {str(e)}")
-
+        
     @staticmethod
-    def update_package(package_id, description, status):
-        # Перевірка існування пакета
+    def update_package(package_id, description=None, status=None, weight=None):
         package = PackagesDAO.get_by_id(package_id)
         if not package:
             raise ValueError("Package not found.")
 
-        # Оновлення полів
         if description is not None:
             package.description = description
         if status is not None:
             package.status = status
-        
+        if weight is not None:
+            if weight <= 0 or weight > 50:
+                raise ValueError("Weight must be between 0 and 50 kg.")
+            package.weight = weight
+
         try:
             PackagesDAO.update(package)
             return package
         except Exception as e:
             raise Exception(f"Error updating package: {str(e)}")
+
 
     @staticmethod
     def delete_package(package_id):

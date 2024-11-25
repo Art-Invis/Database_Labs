@@ -16,7 +16,10 @@ class DeliveryAddressService:
 
     @staticmethod
     def update_address(address_id, address, delivery_instructions):
-        return DeliveryAddressDAO.update_address(address_id, address, delivery_instructions)
+        try:
+            return DeliveryAddressDAO.update_address(address_id, address, delivery_instructions)
+        except Exception as e:
+            DeliveryAddressService._handle_sql_error(e)
 
     @staticmethod
     def delete_address(address_id):
