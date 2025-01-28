@@ -1,4 +1,4 @@
-# Database Systems Project 📊
+# Database Lab Works 📊
 
 This repository contains the implementation of a relational database system using MySQL and Flask, covering various aspects of database design, querying, back-end development, and stored programs.
 
@@ -24,7 +24,7 @@ This repository contains the implementation of a relational database system usin
 🚀 **Getting Started**
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/database_systems.git
+   git clone https://github.com/yourusername/database.git
    cd database_systems
    ```
 2. Set up the MySQL database and import the schema.
